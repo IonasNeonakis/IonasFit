@@ -1,12 +1,24 @@
 /// <reference types="vite/client" />
 import type {ReactNode} from 'react'
-import {createRootRoute, ErrorComponent, HeadContent, Outlet, Scripts} from '@tanstack/react-router'
+import {
+    createRootRouteWithContext,
+    ErrorComponent,
+    HeadContent,
+    Outlet,
+    Scripts
+} from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import {NotFound} from "../pages/NotFound.tsx";
 import normalizeCss from "../styles/normalize.css?url"
 import appCss from "../styles/app.css?url"
+import type {QueryClient} from "@tanstack/react-query";
+import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 
-export const Route = createRootRoute({
+interface Context {
+    queryClient: QueryClient
+}
+
+export const Route = createRootRouteWithContext<Context>()({
     head: () => ({
         meta: [
             {title: "IonasFit"},
@@ -76,6 +88,8 @@ function RootDocument({children}: { children: ReactNode }) {
         <body>
         {children}
         <TanStackRouterDevtools position="bottom-right" />
+        <ReactQueryDevtools buttonPosition="bottom-left" />
+
         <Scripts/>
         </body>
         </html>

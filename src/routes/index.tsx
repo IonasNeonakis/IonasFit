@@ -1,16 +1,18 @@
 import {createFileRoute} from "@tanstack/react-router";
+// @ts-ignore
 import {QRCode} from "react-qr-code";
-import {generateQrCodeData} from "../utils/qrcodeGenerator.ts";
+import {useQuery} from "@tanstack/react-query";
+import {qrCodeOptions} from "../utils/qrcode.ts";
 
 export const Route = createFileRoute('/')({
     component: Home,
-    loader: () => generateQrCodeData()
 })
 
 function Home() {
-    const qrCodeData = Route.useLoaderData()
+    const {data: qrCodeData, isLoading} = useQuery(qrCodeOptions())
 
-    console.log(qrCodeData);
+    if (isLoading) return <p>Loading QR…</p>
+
 
     return (
         <>
