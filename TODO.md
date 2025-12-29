@@ -1,7 +1,8 @@
 - [x] Add style
 - [x] Update README
-- [ ] Buy domain
+- [x] Buy domain
 - [x] Refresh main QR Code 
 - [x] Display friends
 - [ ] Publish
 - [x] Tanstack start
+- [ ] CI/CD
