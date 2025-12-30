@@ -1,17 +1,17 @@
 import {queryOptions} from "@tanstack/react-query";
 import {createServerFn, createServerOnlyFn} from "@tanstack/react-start";
 import {createHash} from "node:crypto";
-import {serverEnv} from "@/config/env.ts";
+import {serverEnv} from "@/config/env.server.ts";
 
-const GUID = "TVR"
-const PREFIX = "GM2";
+
+const QR_GUID = "TVR"
+const QR_PREFIX = "GM2";
 
 
 const generateHash = createServerOnlyFn(async (timestamp: number) => {
-    const CARD_NUMBER = serverEnv.CARD_NUMBER;
-    const DEVICE_ID = serverEnv.DEVICE_ID;
+    const { CARD_NUMBER, DEVICE_ID } = serverEnv;
 
-    const dataToHash = CARD_NUMBER + GUID + timestamp + DEVICE_ID;
+    const dataToHash = CARD_NUMBER + QR_GUID + timestamp + DEVICE_ID;
     const hash = createHash("sha256").update(dataToHash).digest("hex");
 
     // return hash last 8
@@ -25,9 +25,9 @@ export const generateQrCodeData = createServerFn()
 
         const hash = await generateHash(timestamp);
 
-        const CARD_NUMBER = serverEnv.CARD_NUMBER;
+        const { CARD_NUMBER } = serverEnv;
 
-        return `${PREFIX}:${CARD_NUMBER}:${GUID}:${timestamp}:${hash}`;
+        return `${QR_PREFIX}:${CARD_NUMBER}:${QR_GUID}:${timestamp}:${hash}`;
     })
 
 

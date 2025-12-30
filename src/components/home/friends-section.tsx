@@ -1,8 +1,8 @@
-import * as React from "react";
 import { FRIENDS, type Friend } from "@/data/friends.ts";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.tsx";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
+import { ChevronRight } from "lucide-react";
 
 interface FriendsSectionProps {
     onFriendClick: (friend: Friend) => void;
@@ -22,6 +22,7 @@ export function FriendsSection({ onFriendClick }: FriendsSectionProps) {
                             <button
                                 key={friend.id}
                                 onClick={() => onFriendClick(friend)}
+                                aria-label={`Show access code for ${friend.name}`}
                                 className="w-full flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors text-left"
                             >
                                 <Avatar className="h-12 w-12 border">
@@ -33,7 +34,7 @@ export function FriendsSection({ onFriendClick }: FriendsSectionProps) {
                                     <p className="text-sm text-muted-foreground">Card: {friend.cardNumber}</p>
                                 </div>
                                 <div className="text-slate-300">
-                                    <ChevronRightIcon className="h-5 w-5" />
+                                    <ChevronRight className="h-5 w-5" />
                                 </div>
                             </button>
                         ))}
@@ -41,24 +42,5 @@ export function FriendsSection({ onFriendClick }: FriendsSectionProps) {
                 </ScrollArea>
             </CardContent>
         </Card>
-    )
-}
-
-function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <path d="m9 18 6-6-6-6" />
-        </svg>
     )
 }

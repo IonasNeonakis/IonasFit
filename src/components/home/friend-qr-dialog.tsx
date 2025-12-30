@@ -1,6 +1,5 @@
 import { useState } from "react";
-// @ts-expect-error should extract QRCode as the type isn't correct
-import { QRCode } from "react-qr-code";
+import QRCode from "react-qr-code";
 import { type Friend } from "@/data/friends.ts";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.tsx";
 import {
@@ -17,7 +16,7 @@ interface FriendQRDialogProps {
 }
 
 export function FriendQRDialog({ friend, onClose }: FriendQRDialogProps) {
-    const [displayFriend, setDisplayFriend] = useState<Friend | null>(null);
+    const [displayFriend, setDisplayFriend] = useState<Friend | null>(friend);
 
     if (friend && friend !== displayFriend) {
         setDisplayFriend(friend);
@@ -42,7 +41,7 @@ export function FriendQRDialog({ friend, onClose }: FriendQRDialogProps) {
                 </DialogHeader>
                 <div className="flex flex-col items-center justify-center py-6">
                     <div className="bg-white p-4 rounded-xl shadow-inner border border-slate-100">
-                          <QRCode  value={displayFriend?.cardNumber ?? ""} size={256} style={{ height: "auto", maxWidth: "100%", width: "100%" }} />
+                          <QRCode value={displayFriend?.cardNumber ?? ""} size={256} style={{ height: "auto", maxWidth: "100%", width: "100%" }} />
                     </div>
                 </div>
             </DialogContent>

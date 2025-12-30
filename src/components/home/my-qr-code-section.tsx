@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-// @ts-expect-error should extract QRCode as the type isn't correct
-import { QRCode } from "react-qr-code";
+import QRCode from "react-qr-code";
 import { Loader2 } from "lucide-react";
 import {qrCodeOptions, REFETCH_QR_INTERVAL_MS} from "@/utils/qrcode.ts";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
@@ -39,7 +38,7 @@ export function MyQRCodeSection() {
                             <Loader2 className="h-10 w-10 animate-spin text-muted-foreground" />
                         </div>
                     ) : (
-                        <QRCode value={qrCodeData} size={256} style={{ height: "auto", maxWidth: "100%", width: "100%" }} />
+                        <QRCode value={qrCodeData ?? ""} size={256} style={{ height: "auto", maxWidth: "100%", width: "100%" }} />
                     )}
                 </div>
                 <div className="mt-6 w-full max-w-[256px] space-y-2">
