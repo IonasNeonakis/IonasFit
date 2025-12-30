@@ -26,11 +26,11 @@ function Home() {
                         <TabsTrigger value="friends">Friends</TabsTrigger>
                     </TabsList>
                     
-                    <TabsContent value="my-qr" className="space-y-4">
+                    <TabsContent value="my-qr" className="space-y-4 data-[state=inactive]:hidden" forceMount>
                         <MyQRCodeSection />
                     </TabsContent>
                     
-                    <TabsContent value="friends" className="space-y-4">
+                    <TabsContent value="friends" className="space-y-4 data-[state=inactive]:hidden" forceMount>
                         <FriendsSection onFriendClick={setSelectedFriend} />
                     </TabsContent>
                 </Tabs>
