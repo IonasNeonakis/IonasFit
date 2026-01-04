@@ -13,6 +13,7 @@ import normalizeCss from "../styles/normalize.css?url"
 import appCss from "../styles/app.css?url"
 import type {QueryClient} from "@tanstack/react-query";
 import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
+import {Analytics} from "@vercel/analytics/react";
 
 interface Context {
     queryClient: QueryClient
@@ -90,6 +91,7 @@ function RootDocument({children}: { children: ReactNode }) {
         {children}
         <TanStackRouterDevtools position="bottom-right" />
         <ReactQueryDevtools buttonPosition="bottom-left" />
+        <Analytics />
 
         <Scripts/>
         </body>
